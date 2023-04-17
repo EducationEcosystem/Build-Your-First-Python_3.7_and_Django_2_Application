@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+{% block content %}
+{% if users %}
+    <h1>These are the results sir</h1>
+    {% for user in users %}
+        {% if not user in friends and user.username != 'admin' %}
+            <h3>{{ user.username }}</h3>
+            <a href="{% url 'accounts:change_friends' operation='add' pk=user.pk %}">
+                <button type="button" class="btn btn-success">Add Friend</button>
+            </a>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <h1>There are no results sir</h1>
+{% endif %}
+{% endblock %}
